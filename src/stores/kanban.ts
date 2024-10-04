@@ -80,92 +80,30 @@ export const useKanban = defineStore('kanban', () => {
 
   lanesList.value?.set('To Do', [
     {
-      title:
-        "We don't have a brig. Meh. Calculon is gonna kill us and it's all everybody else's fault!",
-      author: 'Philip J. Fry',
-      created_at: '2024-09-11'
+      title: 'After sorting this should be at the end',
+      author: 'John Doe',
+      created_at: '2024-10-05'
     },
     {
-      title:
-        "This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel.",
-      author: 'Turanga Leela',
-      created_at: '2024-09-01'
-    },
-    {
-      title:
-        "Stop it, stop it. It's fine. I will 'destroy' you! I can explain. It's very valuable. ",
-      author: 'Bender Bending Rodriguez',
-      created_at: '2024-09-14'
-    },
-    {
-      title:
-        "Hey, whatcha watching? Hey! I'm a porno-dealing monster, what do I care what you think? It must be wonderful.",
-      author: 'Professor Farnsworth',
-      created_at: '2024-09-14'
-    },
-    {
-      title:
-        "A superpowers drug you can just rub onto your skin? You'd think it would be something you'd have to freebase.",
-      author: 'Amy Wong',
-      created_at: '2024-09-13'
-    },
-    {
-      title:
-        'Robot 1-X, save my friends! And Zoidberg! Perhaps, but perhaps your civilization is merely the sewer of an even greater society above you!',
-      author: 'Hermes Conrad',
-      created_at: '2024-09-16'
-    },
-    {
-      title: "You are the last hope of the universe. Stop! Don't shoot fire stick in space canoe!",
-      author: 'Dr. John A. Zoidberg',
+      title: 'Test Card Title with a really long description to make it break into two lines',
+      author: 'John Doe',
       created_at: '2024-09-05'
     }
   ])
 
   lanesList.value.set('In Progress', [
     {
-      title: "You are the last hope of the universe. Stop! Don't shoot fire stick in space canoe!",
-      author: 'Dr. John A. Zoidberg',
-      created_at: '2024-09-01'
-    },
-    {
-      title:
-        "A superpowers drug you can just rub onto your skin? You'd think it would be something you'd have to freebase.",
-      author: 'Amy Wong',
-      created_at: '2024-08-05'
-    },
-    {
-      title:
-        "This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel.",
-      author: 'Turanga Leela',
+      title: 'Test Title 2',
+      author: 'John Doe',
       created_at: '2024-08-09'
     }
   ])
 
   lanesList.value.set('Done', [
     {
-      title:
-        "Stop it, stop it. It's fine. I will 'destroy' you! I can explain. It's very valuable. ",
-      author: 'Bender Bending Rodriguez',
+      title: 'Test Title 3',
+      author: 'Jane Doe',
       created_at: '2024-09-01'
-    },
-    {
-      title:
-        "Hey, whatcha watching? Hey! I'm a porno-dealing monster, what do I care what you think? It must be wonderful.",
-      author: 'Professor Farnsworth',
-      created_at: '2024-08-01'
-    },
-    {
-      title:
-        "We don't have a brig. Meh. Calculon is gonna kill us and it's all everybody else's fault!",
-      author: 'Philip J. Fry',
-      created_at: '2024-08-15'
-    },
-    {
-      title:
-        "This opera's as lousy as it is brilliant! Your lyrics lack subtlety. You can't just have your characters announce how they feel.",
-      author: 'Turanga Leela',
-      created_at: '2024-08-19'
     }
   ])
 
