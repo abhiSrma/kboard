@@ -16,7 +16,7 @@ const { lanesList } = storeToRefs(store)
       :key="lane"
       class="border border-gray-300 rounded-md bg-gray-50 min-w-[320px] max-w-[360px] snap-start"
     >
-      <KColumn :laneName="lane" :cards="lanesList?.get(lane)"></KColumn>
+      <KColumn :laneName="lane" :cards="lanesList?.get(lane) ?? []"></KColumn>
     </div>
   </div>
 </template>

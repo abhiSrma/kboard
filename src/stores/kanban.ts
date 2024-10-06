@@ -1,23 +1,29 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useKanban = defineStore('kanban', () => {
-  const lanesList = ref<Map<string, Array<any>>>(new Map<string, Array<any>>())
+export interface Task {
+  title: string
+  author: string
+  created_at: string
+}
 
-  function addTask(laneName: string, task: any) {
+export const useKanban = defineStore('kanban', () => {
+  const lanesList = ref<Map<string, Array<Task>>>(new Map<string, Array<Task>>())
+
+  function addTask(laneName: string, task: Task) {
     if (lanesList.value.has(laneName)) {
       lanesList.value.get(laneName)?.push(task)
     }
   }
 
-  function removeTask(laneName: string, task: any) {
+  function removeTask(laneName: string, task: Task) {
     if (lanesList.value.has(laneName)) {
       const filterdList = lanesList.value.get(laneName)?.filter((t) => t.title !== task.title)
       lanesList.value.set(laneName, filterdList ?? [])
     }
   }
 
-  function renameTask(laneName: string, newName: string, task: any) {
+  function renameTask(laneName: string, newName: string, task: Task) {
     if (lanesList.value.has(laneName)) {
       const tasks = lanesList.value.get(laneName)
       tasks?.map((t) => {
@@ -31,7 +37,7 @@ export const useKanban = defineStore('kanban', () => {
 
   function addLane(laneName: string) {
     if (!lanesList.value.has(laneName)) {
-      lanesList.value.set(laneName, new Array<any>())
+      lanesList.value.set(laneName, new Array<Task>())
     }
   }
 
@@ -44,7 +50,7 @@ export const useKanban = defineStore('kanban', () => {
   function renameLane(laneName: string, newName: string) {
     if (lanesList.value.has(laneName)) {
       const value = lanesList.value.get(laneName) ?? []
-      const newMap = new Map<string, Array<any>>()
+      const newMap = new Map<string, Array<Task>>()
 
       for (const [key, val] of lanesList.value) {
         if (key === laneName) {
@@ -64,7 +70,7 @@ export const useKanban = defineStore('kanban', () => {
     }
   }
 
-  function sortTasksByDate(tasks: any[], ascending: boolean): any[] {
+  function sortTasksByDate(tasks: Task[], ascending: boolean): any[] {
     return tasks.sort((a, b) => {
       const dateA = new Date(a.created_at)
       const dateB = new Date(b.created_at)

@@ -19,13 +19,15 @@
       </button>
     </div>
   </div>
-
+  
   <div class="p-4">
-    <draggable class="min-h-full" :list="cards" group="cards" itemKey="name" v-bind="dragOptions">
-      <template #item="{ element }">
-        <KCard :task="element" :laneName="laneName" />
+    <draggableComponent class="min-h-full" :list="cards" item-key="title" group="cards">
+      <template #item="{ element, index }">
+        <div>
+          <KCard :task="element" :laneName="laneName" :index="index" />
+        </div>
       </template>
-    </draggable>
+    </draggableComponent>
   </div>
   <div class="p-4">
     <a
@@ -75,8 +77,8 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import draggable from 'vuedraggable'
+import { ref } from 'vue'
+import draggableComponent from 'vuedraggable'
 import KCard from './KCard.vue'
 import {
   Bars3BottomRightIcon,
@@ -84,21 +86,13 @@ import {
   PlusIcon,
   XCircleIcon
 } from '@heroicons/vue/24/outline'
-import { useKanban } from '@/stores/kanban'
+import { useKanban, type Task } from '@/stores/kanban'
 
 const store = useKanban()
 
-const dragOptions = computed(() => {
-  return {
-    animation: 200,
-    disabled: false,
-    ghostClass: 'ghost'
-  }
-})
-
 const props = defineProps({
-  laneName: String,
-  cards: Array<Object>
+  laneName: { type: String, required: true },
+  cards: { type: Array<Task>, required: true }
 })
 
 const taskTitle = ref<string>('')

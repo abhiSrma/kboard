@@ -32,16 +32,20 @@
   </Dialog>
 </template>
 <script setup lang="ts">
-import { useKanban } from '@/stores/kanban'
+import { useKanban, type Task } from '@/stores/kanban'
 import { PencilSquareIcon, XCircleIcon } from '@heroicons/vue/24/outline'
-import { ref } from 'vue'
+import { ref, type PropType } from 'vue'
 const store = useKanban()
 
 const { removeTask, renameTask } = store
 
 const props = defineProps({
-  laneName: String,
-  task: Object
+  laneName: { type: String, required: true },
+  task: {
+    type: Object as PropType<Task>,
+    required: true
+  },
+  index: Number
 })
 
 const deleteTask = () => {
