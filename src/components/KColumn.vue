@@ -19,7 +19,7 @@
       </button>
     </div>
   </div>
-  
+
   <div class="p-4">
     <draggableComponent class="min-h-full" :list="cards" item-key="title" group="cards">
       <template #item="{ element, index }">
@@ -108,6 +108,8 @@ const laneNewName = ref<string>('')
 const editLaneVisible = ref(false)
 const toggleEditDialog = () => {
   editLaneVisible.value = !editLaneVisible.value
+  taskTitle.value = ''
+  taskAuthor.value = ''
 }
 
 const createTask = () => {

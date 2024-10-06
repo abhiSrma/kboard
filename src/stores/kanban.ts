@@ -16,28 +16,37 @@ export const useKanban = defineStore('kanban', () => {
     }
   }
 
-  function removeTask(laneName: string, task: Task) {
+  function removeTask(laneName: string, index: number) {
     if (lanesList.value.has(laneName)) {
-      const filterdList = lanesList.value.get(laneName)?.filter((t) => t.title !== task.title)
-      lanesList.value.set(laneName, filterdList ?? [])
+      const tasks = lanesList.value.get(laneName)
+      if (tasks) {
+        const updatedTasks = tasks.filter((_, i) => i !== index)
+        lanesList.value.set(laneName, updatedTasks)
+      }
+    } else {
+      alert(`Lane name "${laneName}" does not exist.`)
     }
   }
 
-  function renameTask(laneName: string, newName: string, task: Task) {
+  function renameTask(laneName: string, newName: string, index: number) {
     if (lanesList.value.has(laneName)) {
       const tasks = lanesList.value.get(laneName)
-      tasks?.map((t) => {
-        if (t.title === task.title) {
-          t.title = newName
-        }
-        return t
-      })
+      if (tasks && index >= 0 && index < tasks.length) {
+        tasks[index].title = newName
+        lanesList.value.set(laneName, tasks)
+      } else {
+        alert('Could not delete due to missing information')
+      }
+    } else {
+      alert(`Lane "${laneName}" does not exist.`)
     }
   }
 
   function addLane(laneName: string) {
     if (!lanesList.value.has(laneName)) {
       lanesList.value.set(laneName, new Array<Task>())
+    } else {
+      alert(`Lane name "${laneName}" already exists.`)
     }
   }
 
@@ -49,17 +58,17 @@ export const useKanban = defineStore('kanban', () => {
 
   function renameLane(laneName: string, newName: string) {
     if (lanesList.value.has(laneName)) {
-      const value = lanesList.value.get(laneName) ?? []
-      const newMap = new Map<string, Array<Task>>()
-
-      for (const [key, val] of lanesList.value) {
-        if (key === laneName) {
-          newMap.set(newName, value)
-        } else {
-          newMap.set(key, val)
+      if (!lanesList.value.has(newName)) {
+        const value = lanesList.value.get(laneName)
+        if (value) {
+          lanesList.value.set(newName, value)
+          lanesList.value.delete(laneName)
         }
+      } else {
+        alert(`Lane name "${newName}" already exists. Rename aborted.`)
       }
-      lanesList.value = newMap
+    } else {
+      alert(`Lane name "${laneName}" does not exist.`)
     }
   }
 

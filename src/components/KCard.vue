@@ -45,21 +45,22 @@ const props = defineProps({
     type: Object as PropType<Task>,
     required: true
   },
-  index: Number
+  index: { type: Number, required: true }
 })
 
 const deleteTask = () => {
-  removeTask(props.laneName ?? '', props.task)
+  removeTask(props.laneName, props.index)
 }
 
 const taskNewName = ref<string>('')
 const visible = ref(false)
 const toggleEditDialog = () => {
   visible.value = !visible.value
+  taskNewName.value = ''
 }
 
 const editTask = () => {
-  renameTask(props.laneName ?? '', taskNewName.value, props.task)
+  renameTask(props.laneName, taskNewName.value, props.index)
   toggleEditDialog()
 }
 </script>
